@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @contestant.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @contestant.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @contestant.email %>
+</p>
+
+<%= link_to 'Edit', edit_contestant_path(@contestant) %> |
+<%= link_to 'Back', contestants_path %>
