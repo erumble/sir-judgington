@@ -2,9 +2,10 @@
 
 FactoryGirl.define do
   factory :entry do
-    contest_date '2014-07-03'
     skill_level 4
     hot_or_bulky false
     group_name 'Trouble Makers'
+    handler_count 2
+    contest
   end
 end

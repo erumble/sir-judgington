@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707221938) do
+ActiveRecord::Schema.define(version: 20140712015555) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20140707221938) do
 
   add_index "contestants_entries", ["entry_id", "contestant_id"], name: "index_contestants_entries_on_entry_id_and_contestant_id", unique: true, using: :btree
 
+  create_table "contests", force: true do |t|
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "costumes", force: true do |t|
     t.string   "character_name"
     t.string   "property"
@@ -60,13 +66,16 @@ ActiveRecord::Schema.define(version: 20140707221938) do
   add_index "costumes", ["owner_id"], name: "index_costumes_on_owner_id", using: :btree
 
   create_table "entries", force: true do |t|
-    t.date     "contest_date"
-    t.integer  "skill_level",  default: 0
-    t.boolean  "hot_or_bulky"
+    t.integer  "skill_level",   default: 0
+    t.boolean  "hot_or_bulky",  default: false
     t.string   "group_name"
+    t.integer  "contest_id"
+    t.integer  "handler_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "entries", ["contest_id"], name: "index_entries_on_contest_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

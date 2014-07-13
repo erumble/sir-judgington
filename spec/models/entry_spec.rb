@@ -5,18 +5,18 @@ RSpec.describe Entry, type: :model do
 
   subject { entry }
 
-  it { is_expected.to respond_to :contest_date }
+  it { is_expected.to respond_to :contest }
   it { is_expected.to respond_to :skill_level }
   it { is_expected.to respond_to :hot_or_bulky? }
   it { is_expected.to respond_to :group_name }
-  it { is_expected.to respond_to :categories}
-  it { is_expected.to respond_to :contestants}
+  it { is_expected.to respond_to :categories }
+  it { is_expected.to respond_to :contestants }
+  it { is_expected.to respond_to :handler_count }
 
-  describe :contest_date do
-    subject { entry.contest_date }
+  describe :contest do
+    subject { entry.contest }
 
-    it { is_expected.to be_a Date }
-    it { is_expected.to eql Date.parse 'Thu, 03 Jul 2014' }
+    it { is_expected.to be_a Contest }
   end
 
   describe :skill_level do
@@ -52,5 +52,12 @@ RSpec.describe Entry, type: :model do
     subject { entry.contestants }
 
     it { is_expected.to be_a ActiveRecord::Associations::CollectionProxy }
+  end
+
+  describe :handler_count do
+    subject { entry.handler_count }
+
+    it { is_expected.to be_a Integer }
+    it { is_expected.to eql 2 }
   end
 end
