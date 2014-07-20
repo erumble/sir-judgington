@@ -1,3 +1,57 @@
+<%= javascript_include_tag "entry.js" %>
+<div class="entry_wrapper">
 <%= form_for @entry do |f| %>
+<table class="general_table">
+  <th colspan="2">General Information</th>
+  <tr>
+    <td>Group Name:</td>
+    <td><input type="text" name="group_name"></td>
+  </tr>
+  <tr>
+    <td>Skill Level</td>
+    <td><select name="skill_level">
+          <option>Youth</option>
+          <option>Novice</option>
+          <option>Journeyman</option>
+          <option>Master</option>
+        </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Hot or Bulky</td>
+    <td><input type="checkbox" name="hot_or_bulky">Hot <input type="checkbox">Bulky</td>
+  </tr>
+  <tr>
+    <td>Judging Time</td>
+    <td><%= collection_select(:judging_time, :judging_time_id, JudgingTime.all, :id, :time) %></td>
+  </tr>
+  <tr>
+    <td>Categories</td>
+    <td><input type="text"></td>
+  </tr>
+</table>
+Contestants
+<table class="general_table" id="contestant_table">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Phonetic Spelling</th>
+    <th>Character Name</th>
+    <th>Property</th>
+  </tr>
+  <a href="#" id="addrow"><button type="button">Add</button></a>
+  <tbody>
+  <tr class="contestants">
+    <td><input type="text" name="first_name"></td>
+    <td><input type="text" name="last_name"></td>
+    <td><input type="email" name="email"></td>
+    <td><input type="text" name="phonetic"></td>
+    <td><input type="text" name="character_name"></td>
+    <td><input type="text" name="property"></td>
+  </tr>
+  </tbody>
+</table>
+
 <%= f.submit %>
 <% end %>
