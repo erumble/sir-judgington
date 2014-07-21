@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @contestant = Contestant.new
   end
 
   def create
