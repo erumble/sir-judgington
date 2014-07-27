@@ -1,3 +1,57 @@
+<%= javascript_include_tag "entry.js" %>
+<div class="entry_wrapper">
 <%= form_for @entry do |f| %>
+<table class="general_table">
+  <th colspan="2">General Information</th>
+  <tr>
+    <td>Group Name:</td>
+    <td><%= f.text_field :group_name %></td>
+  </tr>
+  <tr>
+    <td>Skill Level</td>
+    <td>
+      <%= f.select :skill_level, options_for_select([['Youth', 1], ['Novice', 2], ['Journeyman'], ['Master']], 4) %>
+    </td>
+  </tr>
+  <tr>
+    <td>Hot or Bulky</td>
+    <td><%= f.check_box :hot_or_bulky %></td>
+  </tr>
+  <tr>
+    <td>Judging Time</td>
+    <td><%= collection_select(:judging_time, :judging_time_id, JudgingTime.all, :id, :time) %></td>
+  </tr>
+  <%= fields_for :categories do |f| %>
+  <tr>
+    <td>Categories</td>
+    <td><% collection_select(:category, :category_id, Category.all, :id, :name) %></td>
+  </tr>
+  <% end %>
+</table>
+Contestants
+<table class="general_table" id="contestant_table">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Phonetic Spelling</th>
+    <th>Character Name</th>
+    <th>Property</th>
+  </tr>
+  <a href="#" id="addrow"><button type="button">Add</button></a>
+  <%= fields_for :contestants, @contestants do |u| %>
+  <tbody>
+  <tr class="contestants">
+    <td><%= u.text_field :first_name %></td>
+    <td><%= u.text_field :last_name %></td>
+    <td><%= u.text_field :email %></td>
+    <td><%= u.text_field :phonetic %></td>
+    <td><%= u.text_field :character_name %></td>
+    <td><%= u.text_field :property %></td>
+  </tr>
+  </tbody>
+  <% end %>
+</table>
+
 <%= f.submit %>
 <% end %>
