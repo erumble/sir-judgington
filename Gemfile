@@ -15,7 +15,6 @@ gem 'active_model_serializers'
 gem 'font-awesome-rails'
 gem 'haml'
 gem 'cocoon'
-gem 'dotenv-rails', '~> 2.0.2'
 gem 'tzinfo-data'
 
 group :development do
