@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 ruby '~> 2.1.2'
-gem 'bundler', '~> 1.13.1'
 gem 'rails', '4.1.1'
-gem 'therubyracer', '~> 0.12.2'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -18,6 +16,7 @@ gem 'font-awesome-rails'
 gem 'haml'
 gem 'cocoon'
 gem 'dotenv-rails', '~> 2.0.2'
+gem 'tzinfo-data'
 
 group :development do
   gem 'spring'
