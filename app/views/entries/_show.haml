@@ -20,7 +20,6 @@
         %thead
           %tr
             %th Name
-            %th Phonetic Spelling
             %th Email
             %th Character
             %th Property
@@ -28,7 +27,6 @@
           - @entry.cosplays.each do |cosplay|
             %tr
               %td= cosplay.person_full_name.titleize
-              %td= cosplay.person_phonetic_spelling.titleize if cosplay.person_phonetic_spelling
               %td= cosplay.person_email
               %td= cosplay.character_name.titleize
               %td= cosplay.character_property.titleize
