@@ -8,6 +8,8 @@ services:
       - '3000:3000'
     depends_on:
       - db
+    volumes:
+      - db-backups:/opt/sir_judgington/db/backups
     environment:
       # database.yml
       DB_ADAPTER: 'postgresql'
@@ -24,3 +26,7 @@ services:
       SECRET_KEY_BASE: 'd5c768ff1372f1cda3a59256365ecaf5ee44fc2cd4e17d980e776fa0cbad3db685fc59dca41f21977ceb75ef52a3b0378a7895686049f246aaff63b292d904e4'
   db:
     image: postgres:9.3
+
+volumes:
+  db-backups: {}
+

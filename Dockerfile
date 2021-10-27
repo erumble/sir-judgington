@@ -1,7 +1,10 @@
 FROM ruby:2.5-alpine
 
 # Install requisite packages for app to run
-RUN apk --update --no-cache add nodejs postgresql-dev
+RUN apk --update --no-cache add \
+    nodejs \
+    postgresql \
+    postgresql-dev
 
 # Make and set the working directory
 RUN mkdir -p /opt/sir_judgington
@@ -10,7 +13,8 @@ WORKDIR /opt/sir_judgington
 # Copy the gemfile and install all the gems
 COPY Gemfile Gemfile.lock ./
 
-RUN apk --update --no-cache add --virtual gem-builddeps \
+RUN apk --update --no-cache add \
+    --virtual gem-builddeps \
     build-base \
     libxml2-dev \
     ruby-dev \
@@ -20,3 +24,4 @@ RUN apk --update --no-cache add --virtual gem-builddeps \
 
 COPY . .
 RUN rm -rf tmp
+
