@@ -9,7 +9,8 @@ services:
     depends_on:
       - db
     volumes:
-      - db-backups:/opt/sir_judgington/db/backups
+      - web-data:/opt/sir_judgington/db/backups
+      - web-data:/opt/sir_judgington/data/csvs
     environment:
       # database.yml
       DB_ADAPTER: 'postgresql'
@@ -30,5 +31,5 @@ services:
       - db-data:/var/lib/postgresql/data
 
 volumes:
-  db-backups: {}
+  web-data: {}
   db-data: {}
