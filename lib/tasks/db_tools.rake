@@ -1,5 +1,4 @@
 namespace :db do
-
   desc "Drop, create, and seed the database"
   task :reset => :environment do
     Rake::Task["db:drop"].invoke
