@@ -16,6 +16,7 @@ gem 'font-awesome-rails'
 gem 'haml'
 gem 'cocoon'
 gem 'tzinfo-data'
+gem 'csv'
 
 group :development do
   gem 'spring'

@@ -5,7 +5,7 @@ class EntriesController < ApplicationController
   end
 
   def csv
-    @entries = Entry.crazy_filter
+    @entries = Entry.to_csv
   end
 
   def show

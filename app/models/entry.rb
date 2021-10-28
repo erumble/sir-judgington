@@ -89,6 +89,17 @@ class Entry < ActiveRecord::Base
     ary.sort_by!{|a| a.entry_num.split("-").last}
   end
 
+  def self.to_csv
+    CSV.generate('', headers: ["Entry", "Name", "Character", "IP"], write_headers: true, force_quotes: true) do |csv|
+      entries = self.crazy_filter
+      entries.each do |entry|
+        entry.cosplays.each do |cp|
+          csv << ["#{entry.entry_num}", "#{cp.person_full_name.titleize}", "#{cp.character_name.titleize}", "#{cp.character_property.titleize}"]
+        end
+      end
+    end
+  end
+
 end
 #
 # Legal Name:

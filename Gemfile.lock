@@ -89,6 +89,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    csv (3.2.1)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     devise (4.5.0)
@@ -328,6 +329,7 @@ DEPENDENCIES
   capybara
   cocoon
   coffee-rails (~> 4.0.0)
+  csv
   database_cleaner
   devise
   factory_girl_rails
@@ -368,4 +370,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.5
+   1.17.3
