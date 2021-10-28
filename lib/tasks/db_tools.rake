@@ -13,7 +13,8 @@ namespace :db do
     task :create => :environment do
       cmd = nil
       with_config do |app, host, db, user|
-        file_name = Time.now.strftime("%Y%m%d%H%M%S") + "_" + db + db_ext
+        file_name = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{db}#{db_ext}"
+
         cmd = "pg_dump"\
           " --format=custom"\
           " --verbose"\
@@ -29,9 +30,7 @@ namespace :db do
     desc "List the existing database backups"
     task :list => :environment do
       puts "###############\n# DB Backups: #\n###############"
-      backup_files.each do |backup|
-        puts File.basename(backup)
-      end
+      backup_files.each { |backup_file| puts backup_file }
     end
 
     desc "Restore the database from a backup"
@@ -80,6 +79,6 @@ namespace :db do
   end
 
   def backup_files
-    Dir.glob("#{backup_dir}/*").reject{|f| File.extname(f) != db_ext}.map{|f| File.basename f}.sort
+    Dir.glob("#{backup_dir}/*").reject { |f| File.extname(f) != db_ext }.map { |f| File.basename f }.sort
   end
 end
