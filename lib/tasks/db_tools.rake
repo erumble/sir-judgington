@@ -13,7 +13,7 @@ namespace :db do
     task :create => :environment do
       cmd = nil
       with_config do |app, host, db, user|
-        file_name = Time.now.strftime("%Y%m%d%H%M%S") + "_" + db + '.psql'
+        file_name = Time.now.strftime("%Y%m%d%H%M%S") + "_" + db + db_ext
         cmd = "pg_dump"\
           " --format=custom"\
           " --verbose"\
@@ -28,36 +28,37 @@ namespace :db do
 
     desc "List the existing database backups"
     task :list => :environment do
-      backups = Dir.glob("#{backup_dir}/*").reject{|f| File.directory? f}.sort
-
       puts "###############\n# DB Backups: #\n###############"
-      backups.each do |backup|
+      backup_files.each do |backup|
         puts File.basename(backup)
       end
     end
 
     desc "Restore the database from a backup"
     task :restore, [:file] => :environment do |task,args|
-      if args.file.present?
-        cmd = nil
-        with_config do |app, host, db, user|
-          cmd = "pg_restore"\
-            " --format=custom"\
-            " --verbose"\
-            " --clean"\
-            " --create"\
-            " --host=#{host}"\
-            " --username=#{user}"\
-            " --dbname=#{db}"\
-            " #{backup_dir}/#{args.file}"
-        end
-        Rake::Task["db:drop"].invoke
-        Rake::Task["db:create"].invoke
-        puts cmd
-        exec cmd
+      backup_file = if backup_files.include? args.file
+        args.file
       else
-        puts 'Please pass a date to the task'
+        backup_files.last
       end
+
+      puts "Restoring backup file #{backup_file}"
+      cmd = nil
+      with_config do |app, host, db, user|
+        cmd = "pg_restore"\
+          " --format=custom"\
+          " --verbose"\
+          " --clean"\
+          " --create"\
+          " --host=#{host}"\
+          " --username=#{user}"\
+          " --dbname=#{db}"\
+          " #{backup_dir}/#{backup_file}"
+      end
+      Rake::Task["db:drop"].invoke
+      Rake::Task["db:create"].invoke
+      puts cmd
+      exec cmd
     end
   end
 
@@ -74,5 +75,11 @@ namespace :db do
     "#{Rails.root}/db/backups"
   end
 
-end
+  def db_ext
+    ".psql"
+  end
 
+  def backup_files
+    Dir.glob("#{backup_dir}/*").reject{|f| File.extname(f) != db_ext}.map{|f| File.basename f}.sort
+  end
+end
