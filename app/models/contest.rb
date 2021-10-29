@@ -22,7 +22,7 @@ class Contest < ActiveRecord::Base
   def available_judging_times(entry)
     time = [].tap do |row|
       judging_times.each do |jt|
-        row << jt if entries.where(judging_time: jt).count < 5
+        row << jt if entries.where(judging_time: jt).count < 4
       end
       if entry.judging_time && (!row.include? entry.judging_time)
         row << entry.judging_time #if (entry.judging_time) && !row.include? entry.judging_time)

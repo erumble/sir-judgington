@@ -9,7 +9,6 @@
         = person.input :email, placeholder: "Email",  label: false, input_html: {class: 'typeahead email'}
         = person.input :first_name, placeholder: "First name",  label: false, input_html: {class: 'first_name'}
         = person.input :last_name, placeholder: "Last name",  label: false, input_html: {class: 'last_name'}
-        = person.input :phonetic_spelling, placeholder: "Phonetic spelling",  label: false, input_html: {class: 'phonetic_spelling'}
     %div
       %span.bg-danger #{f.object.errors.full_messages_for(:person).join("; ")}
   %div.pull-left
@@ -30,7 +29,7 @@
       displayKey: "email",
       source: window.aw_snaps.emails.ttAdapter(),
       templates: {
-        suggestion: _.template('<p><strong><%=email%></strong> – <%=first_name%> <%=last_name%> - <%=phonetic_spelling%></p>')
+        suggestion: _.template('<p><strong><%=email%></strong> – <%=first_name%> <%=last_name%></p>')
       }
     });
     $(".persons .typeahead").on('typeahead:selected', window.aw_snaps.emailItemSelectedHandler);
