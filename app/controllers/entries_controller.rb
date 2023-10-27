@@ -77,7 +77,7 @@ class EntriesController < ApplicationController
       :cosplays_attributes => [
         :id,
         :_destroy,
-        person_attributes: [:id, :first_name, :last_name, :phonetic_spelling, :email, :_destroy],
+        person_attributes: [:id, :first_name, :last_name, :nickname, :email, :_destroy],
         character_attributes: [:id, :name, :property, :_destroy]
       ]
     )

@@ -9,7 +9,7 @@ class Cosplay < ActiveRecord::Base
   validates :person, uniqueness: { scope: :entry }
   validate :person_not_registered_in_contest
 
-  delegate :first_name, :last_name, :full_name, :email, :phonetic_spelling, to: :person, prefix: true
+  delegate :first_name, :last_name, :full_name, :email, :nickname, to: :person, prefix: true
   delegate :name, :property, to: :character, prefix: true
 
   accepts_nested_attributes_for :person, :reject_if => :all_blank

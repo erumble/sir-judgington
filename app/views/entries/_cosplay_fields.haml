@@ -9,6 +9,7 @@
         = person.input :email, placeholder: "Email",  label: false, input_html: {class: 'typeahead email'}
         = person.input :first_name, placeholder: "First name",  label: false, input_html: {class: 'first_name'}
         = person.input :last_name, placeholder: "Last name",  label: false, input_html: {class: 'last_name'}
+        = person.input :nickname, placeholder: "Nickname",  label: false, input_html: {class: 'nickname'}
     %div
       %span.bg-danger #{f.object.errors.full_messages_for(:person).join("; ")}
   %div.pull-left

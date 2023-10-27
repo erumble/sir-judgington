@@ -94,7 +94,8 @@ class Entry < ActiveRecord::Base
       entries = self.crazy_filter
       entries.each do |entry|
         entry.cosplays.each do |cp|
-          csv << ["#{entry.entry_num}", "#{cp.person_full_name.titleize}", "#{cp.character_name.titleize}", "#{cp.character_property.titleize}"]
+          name = cp.person_nickname.empty? ? cp.person_first_name : cp.person_nickname
+          csv << ["#{entry.entry_num}", "#{name.titleize}", "#{cp.character_name.titleize}", "#{cp.character_property.titleize}"]
         end
       end
     end
