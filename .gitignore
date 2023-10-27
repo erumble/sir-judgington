@@ -87,3 +87,5 @@ public/assets/*
 /ansible/roles
 /.vagrant
 /ansible/*.retry
+
+/volumes/
