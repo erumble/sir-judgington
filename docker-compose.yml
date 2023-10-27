@@ -2,6 +2,7 @@
 version: '3'
 services:
   web:
+    # image: sir-judgington_web
     build: .
     command: 'bin/puma -C config/puma.rb'
     ports:
@@ -9,8 +10,8 @@ services:
     depends_on:
       - db
     volumes:
-      - web-data:/opt/sir_judgington/db/backups
-      - web-data:/opt/sir_judgington/data/csvs
+      - ./volumes/web:/opt/sir_judgington/db/backups
+      - ./volumes/web:/opt/sir_judgington/data/csvs
     environment:
       # database.yml
       DB_ADAPTER: 'postgresql'
@@ -28,8 +29,5 @@ services:
   db:
     image: postgres:9.3
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - ./volumes/db:/var/lib/postgresql/data
 
-volumes:
-  web-data: {}
-  db-data: {}
