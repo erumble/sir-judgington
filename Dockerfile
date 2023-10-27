@@ -18,10 +18,9 @@ RUN apk --update --no-cache add \
     build-base \
     libxml2-dev \
     ruby-dev \
- && gem install bundler \
+ && gem install bundler -v 2.3.26 \
  && bundle install --jobs=20 --retry=5 --deployment --clean \
  && apk del gem-builddeps
 
 COPY . .
 RUN rm -rf tmp
-
